@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Hashtag and URL parser</h2>
+
+
+<button onclick="replaceHashtag()">Replace hashtag</button>
+<button onclick="replaceURL()">Replace URL</button>
+<img src="https://storage.googleapis.com/storage/v1/b/risemedialibrary-30007b45-3df0-4c7b-9f7f-7d8ce6443013/o/unit-test-do-not-delete%2FU%CC%88-%2B%20test%2520encoding%20(%5B!%40%3F%2C%23%24%5D)%3D1%2B2-A%26%25.jpg?alt=media">
+
+<p id="demo"></p>
+
+<script>
+function replaceHashtag() {
+  var str = "aaa #bbb ccc #ddd https://t.co/sQ7DgjLCSt";
+  str = str.replace(/#\w+/gi, function(matched){
+    return "<span style='color:red'>" + matched + "</span>";
+  });
+
+  document.getElementById("demo").innerHTML = str;
+
+}
+
+function replaceURL() {
+  var str = "aaa #bbb ccc #ddd https://t.co/sQ7DgjLCSt";
+
+  str = str.replace(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi, function(matched){
+    return "<span style='color:green'>" + matched + "</span>";
+  });
+
+  document.getElementById("demo").innerHTML = str;
+
+}
+
+</script>
+
+</body>
+</html>
+
