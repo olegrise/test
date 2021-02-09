@@ -1,14 +1,12 @@
+importScripts('https://storage.googleapis.com/workbox-cdn/releases/5.0.0/workbox-sw.js');
+
 addEventListener("install", ()=>console.log("installed sw"));
 addEventListener("activate", ()=>console.log("activated sw"));
 
-addEventListener("fetch", event=>{
-  console.log(`main sw handling fetch of ${event.request.url} for ${event.clientId}`);
+workbox.routing.registerRoute(
+  /test-bucket-tyler.*/,
+  workbox.strategies.CacheOnly({
+    cacheName: 'test-cache'
+  })
+);
 
-  const url = new URL(event.request.url);
-  if (url.pathname.startsWith("/test-bucket-tyler")) {
-    event.respondWith(
-      caches.open("test-cache")
-      .then(cache=>cache.match(url.pathname))
-    );
-  }
-})
